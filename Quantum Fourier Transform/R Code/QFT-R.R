@@ -1,5 +1,8 @@
+#install.packages("xlsx")
+library("xlsx")
 library("readxl")
-my_data <- read_excel("C:\\Users\\Gabriel\\Desktop\\University\\Quantum Computing Algorithms\\QFT\\QFT-R\\QFTres0111.xlsx")
+library("dplyr")
+my_data <- read_excel("C:\\Users\\Gabriel\\Desktop\\University\\Quantum Computing Algorithms\\QFT\\QFT-R\\QFTres0000.xlsx")
 str(my_data)
 my_data = my_data/5000
 my_data = my_data*2
@@ -35,6 +38,9 @@ for (j in 1:nrow(my_data)) {
       overallPhase <- 0 + low_ctr
     } else if (low_ctr2_phase == "-i"){
       overallPhase <- 360 - low_ctr
+      if (low_ctr == 0){
+        overallPhase <- 0
+      }
     }
   } else if (low_ctr_phase == "i"){
     if(low_ctr2_phase == "+"){
@@ -58,4 +64,8 @@ for (j in 1:nrow(my_data)) {
   ans_lst[paste("Qubit ", toString(j))] <- overallPhase
 }
 str(ans_lst[])
+my_data <- my_data %>% mutate("Calculated Phase" = ans_lst)
+write.xlsx(my_data, 
+           file = "C:\\Users\\Gabriel\\Desktop\\University\\Quantum Computing Algorithms\\QFT\\QFT-R\\QFTres0000Calc.xlsx",
+           sheetName="QFT0111Results", append=FALSE)
 
