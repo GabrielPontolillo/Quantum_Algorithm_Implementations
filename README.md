@@ -94,6 +94,8 @@ R seems very similar to Python data science with Pandas, Mathplotlib, Numpy. I r
 - [Official Introduction](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Preface)
 - [R FAQ](https://cran.r-project.org/doc/FAQ/R-FAQ.html)
 
+---
+
 ### Chapter 4: This GitHub
 
 Once you understand some of the theory, installed everything and had a look at some of the programming languages, you can begin by looking at the [Quantum Fourier Transform folder](https://github.com/Lilgabz/Quantum-Algorithm-Implementations/tree/main/Quantum%20Fourier%20Transform)
@@ -111,7 +113,9 @@ There are also 2 word document files in the QFT folder:
     - Step-by-step and side-by-side descriptions of all 3 implementations of the QFT algorithm, this is quite in depth and will help with understanding the differences between the languages.
 2. **[QFT Property Test Example](https://github.com/Lilgabz/Quantum-Algorithm-Implementations/blob/main/Quantum%20Fourier%20Transform/QFT%20Property%20Test%20Example.docx)**:
     - This document contains 5 examples of manually testing the properties using the results gathered from the output spreadsheet genereated from the R code.
-    
+  
+---
+  
 ### Chapter 5: Guide to start
 
 1. It's best to look at the "QFT Benchmarks" document first, to get an idea of what the code looks like and what the QFT algorithm should do.
