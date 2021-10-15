@@ -8,16 +8,16 @@ Contains code, descriptions of quantum algorithms in Qiskit, Q# and Cirq
 
 ### Chapter 1: A little bit of quantum theory
 
-For a very basic and short introduction look at the first few chapters of this site, from ìThe basics of quantum computingî to ìWhat is a quantum algorithmî, donít worry about the code in [this site](https://www.quantum-inspire.com/kbase/introduction-to-quantum-computing/), but the theory is good. 
+For a very basic and short introduction look at the first few chapters of this site, from ‚ÄúThe basics of quantum computing‚Äù to ‚ÄúWhat is a quantum algorithm‚Äù, don‚Äôt worry about the code in [this site](https://www.quantum-inspire.com/kbase/introduction-to-quantum-computing/), but the theory is good. 
 
-Qiskitís (IBM) lecture videos provide a very good introduction to quantum computing, they go through a lot of theory and explain the basics in a timely manner. They also go through quantum algorithms in a digestible manner for a beginner. 
+Qiskit‚Äôs (IBM) lecture videos provide a very good introduction to quantum computing, they go through a lot of theory and explain the basics in a timely manner. They also go through quantum algorithms in a digestible manner for a beginner. 
 I would recommend watching lectures **up to chapter 9**. 
 
 - [Qiskit's course](https://qiskit.org/learn/intro-qc-qh/)
 
 This course provides lecture notes and labs as well as the lectures, though I recommend that you take your own notes to better retain the details. In these videos they **mainly go through theory**, so you should watch these no matter what QC language you use.
 
-I would also recommend [StackOverflow](https://stackoverflow.com/) for asking questions if you get stuck somewhere. Unfortunately, there are not many questions already asked on StackOverflow for quantum programming languages, thatís why Iíd only recommend looking there if you have a specific question to ask.
+I would also recommend [StackOverflow](https://stackoverflow.com/) for asking questions if you get stuck somewhere. Unfortunately, there are not many questions already asked on StackOverflow for quantum programming languages, that‚Äôs why I‚Äôd only recommend looking there if you have a specific question to ask.
 
 You can also use a more specific [StackExchange](https://quantumcomputing.stackexchange.com/) for **quantum computing**, a lot of the threads go through high level theory instead of coding, but it's **more active than** the QC language tags on StackOverflow for [Qiskit](https://stackoverflow.com/questions/tagged/qiskit), [CirQ](https://stackoverflow.com/questions/tagged/cirq) and [Q#](https://stackoverflow.com/questions/tagged/q%23).
 
@@ -69,7 +69,7 @@ You can also use a more specific [StackExchange](https://quantumcomputing.stacke
 
 #### CirQ
 
-If you begun by looking into qiskit, the structure of CirQ code will be very familiar as they follow a very similar concept of defining a quantum circuit and running it. The main difference that can be found with CirQ, is that Qubits are separate Objects and they need to be declared and stored in an array and passed into functions that create said circuits.
+If you've begun by looking into qiskit, the structure of CirQ code will be very familiar as they follow a very similar concept of defining a quantum circuit and running it. The main difference that can be found with CirQ, is that Qubits are separate Objects and they need to be declared and stored in an array and passed into functions that create said circuits.
 
 - [Basic tutorial for CirQ](https://quantumai.google/cirq/tutorials/basics) Simple introduction to syntax and various concepts.
 - [Textbook algorithms in CirQ](https://quantumai.google/cirq/tutorials/educators/textbook_algorithms) Contains various quantum algorithm implementation.
@@ -78,7 +78,7 @@ If you begun by looking into qiskit, the structure of CirQ code will be very fam
 
 #### Q#
 
-When searching for information on google on Q#, search ëmicrosoft qsharpí in google instead of ëQ#í, otherwise you will get a lot of irrelevant results. 
+When searching for information on google on Q#, search ‚Äòmicrosoft qsharp‚Äô in google instead of ‚ÄòQ#‚Äô, otherwise you will get a lot of irrelevant results. 
 
 - [A basic tutorial on calling Q# code with a C# host](https://docs.microsoft.com/en-us/azure/quantum/install-csharp-qdk?tabs=tabid-cmdline%2Ctabid-csharp) It also includes some basic Q# syntax.
 - [The 4 tutorials on this site are quite good](https://docs.microsoft.com/en-us/azure/quantum/tutorial-qdk-quantum-random-number-generator?tabs=tabid-qsharp)
