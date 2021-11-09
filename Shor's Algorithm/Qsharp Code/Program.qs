@@ -78,17 +78,7 @@ namespace Shors_Algorithm {
         return results;
     }
 
-    // def qpe_amod15(a):
-    // simulator = cirq.Simulator()
-    // results = simulator.run(qc , repetitions =1)
-    // print(type(results.measurements['m'][0]))
-    // print(np.array2string(results.measurements['m'][0], separator='')[1:-1][::-1])
-    // readings = np.array2string(results.measurements['m'][0], separator='')[1:-1][::-1]
-    // phase = int(readings,2)/(2**n_count)
-    // return phase
-
-
-    operation runQKD(a: Int) : Result[] {
+    operation runShors(a: Int) : Result[] {
         return(Array.Reversed<Result>(qpe_amod15(a)));
     }
 }

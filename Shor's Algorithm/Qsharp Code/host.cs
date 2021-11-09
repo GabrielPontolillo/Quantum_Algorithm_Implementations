@@ -23,7 +23,7 @@ namespace Shors_Algorithm
                     Console.WriteLine("Attempt " + attempt);
                     String resString = "";
                     for (int i = 0; i < 8; i++) {
-                        Result res = (Result)runQKD.Run(qsim, a).Result[i];
+                        Result res = (Result)runShors.Run(qsim, a).Result[i];
                         if (res == Result.One){
                             resString +=  "1";
                         } else {
