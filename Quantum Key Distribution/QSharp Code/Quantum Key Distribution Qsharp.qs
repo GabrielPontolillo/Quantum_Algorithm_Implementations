@@ -73,8 +73,8 @@ namespace Quantum_key_distribution {
         mutable bitsArr = bits;
         mutable sample = new Int[0];
         for i in selection {
-           Message(IntAsString(i));
-           Message(IntAsString(Length(bitsArr)));
+           //Message(IntAsString(i));
+           //Message(IntAsString(Length(bitsArr)));
            mutable popVal = ModI(i, Length(bitsArr));
            set sample += [bitsArr[popVal]];
            set bitsArr = Array.Exclude([popVal], bitsArr);
