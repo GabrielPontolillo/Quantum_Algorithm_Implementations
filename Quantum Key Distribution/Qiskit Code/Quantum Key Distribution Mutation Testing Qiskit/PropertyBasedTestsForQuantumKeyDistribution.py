@@ -3,7 +3,6 @@ import numpy as np
 
 import hypothesis.strategies as st
 from hypothesis import given, settings
-from qiskit.circuit.library import Barrier, HGate, XGate
 from qiskit import QuantumCircuit, Aer
 
 #####################################################################################
@@ -12,11 +11,12 @@ from qiskit import QuantumCircuit, Aer
 ### e.g. from Add_mutant_1 import remove_garbage, generate_binary, encode_message, measure_message
 #####################################################################################
 
-from QKD import remove_garbage, generate_binary, encode_message, measure_message
+from QuantumKeyDistribution import remove_garbage, generate_binary, encode_message, measure_message
 
 ###########################################################################
 ## Define composite strategies to generate lists of ints in equal length ##
 ###########################################################################
+
 @st.composite
 def single_list(draw):
     arrayLengths = draw(st.integers(min_value=1, max_value=100))
@@ -64,33 +64,6 @@ def test_encode_message_equal_length_to_base(lists):
     alice_bits, alice_bases = lists
     circuitArr = encode_message(alice_bits, alice_bases, len(alice_bits))
     assert(len(circuitArr) ==  len(alice_bits))
-
-@given(pair_of_lists())
-@settings(deadline=None)
-def test_encode_message_are_circuits(lists):
-    alice_bits, alice_bases = lists
-    circuitArr = encode_message(alice_bits, alice_bases, len(alice_bits))
-    for i in circuitArr:
-        assert(isinstance(i, QuantumCircuit))
-
-@given(pair_of_lists())
-@settings(deadline=None)
-def test_encode_message_circuits_are_not_longer_than_3(lists):
-    alice_bits, alice_bases = lists
-    circuitArr = encode_message(alice_bits, alice_bases, len(alice_bits))
-    for i in circuitArr:
-        assert(not(len(i.data) > 3))
-
-@given(pair_of_lists())
-@settings(deadline=None)
-def test_encode_message_circuits_use_only_H_X_Barrier(lists):
-    alice_bits, alice_bases = lists
-    circuitArr = encode_message(alice_bits, alice_bases, len(alice_bits))
-    for i in circuitArr:
-        for gate in i:
-            assert(isinstance(gate[0], Barrier) 
-                   or isinstance(gate[0], XGate)
-                   or isinstance(gate[0], HGate)) 
 
 ############################
 ## decoding message tests ##
@@ -171,9 +144,6 @@ if __name__ == "__main__":
     test_created_message_is_binary()
     test_created_message_equal_length_to_int_passed_in()
     test_encode_message_equal_length_to_base()
-    test_encode_message_are_circuits()
-    test_encode_message_circuits_are_not_longer_than_3()
-    test_encode_message_circuits_use_only_H_X_Barrier()
     test_decode_message_length_equals_base_length()
     test_decode_message_is_binary()
     test_decode_with_same_base_returns_original_bits()

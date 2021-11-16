@@ -1,4 +1,4 @@
-namespace MyQFT {
+namespace QuantumFourierTransform {
 
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Intrinsic;

@@ -1,16 +1,13 @@
 import unittest
 
 import cirq
-from cirq.ops import H, X, I
-import random
-import matplotlib.pyplot as plt
 import numpy as np
 from numpy.random import randint
 
 import hypothesis.strategies as st
 from hypothesis import given, settings
 
-from QKD import remove_garbage, generate_binary, encode_message, measure_message
+from Replace_mutant_5 import remove_garbage, generate_binary, encode_message, measure_message
 
 ###########################################################################
 ## Define composite strategies to generate lists of ints in equal length ##
@@ -63,33 +60,6 @@ def test_encode_message_equal_length_to_base(lists):
     circuitArr = encode_message(alice_bits, alice_bases, len(alice_bits))
     assert(len(circuitArr) ==  len(alice_bits))
 
-@given(pair_of_lists())
-@settings(deadline=None)
-def test_encode_message_are_circuits(lists):
-    alice_bits, alice_bases = lists
-    circuitArr = encode_message(alice_bits, alice_bases, len(alice_bits))
-    for i in circuitArr:
-        assert(isinstance(i, cirq.Circuit))
-
-@given(pair_of_lists())
-@settings(deadline=None)
-def test_encode_message_circuits_are_not_longer_than_2(lists):
-    alice_bits, alice_bases = lists
-    circuitArr = encode_message(alice_bits, alice_bases, len(alice_bits))
-    for i in circuitArr:
-        assert(not(sum(1 for _ in i.all_operations()) > 2))
-
-@given(pair_of_lists())
-@settings(deadline=None)
-def test_encode_message_circuits_use_only_H_X_I(lists):
-    alice_bits, alice_bases = lists
-    circuitArr = encode_message(alice_bits, alice_bases, len(alice_bits))
-    for i in circuitArr:
-        for gate in i.all_operations():
-            assert(isinstance(gate.gate, cirq.ops.identity.IdentityGate)
-                   or isinstance(gate.gate, cirq.ops.pauli_gates._PauliX)
-                   or isinstance(gate.gate, cirq.ops.common_gates.HPowGate)) 
-
 ############################
 ## decoding message tests ##
 ############################
@@ -135,7 +105,7 @@ def test_decoding_runs_likely_different(lists):
     alice_bits, alice_bases, bob_base = lists
     encoded_message = encode_message(alice_bits, alice_bases, len(bob_base))
     msmtArr = measure_message(encoded_message, alice_bases, len(alice_bases))
-    msmtArrRun2 = measure_message(encoded_message, bob_bases, len(bob_base))
+    msmtArrRun2 = measure_message(encoded_message, bob_base, len(bob_base))
     assert(not np.array_equal(np.array(msmtArr), np.array(msmtArrRun2)))
 
 ##############################
@@ -169,9 +139,6 @@ if __name__ == "__main__":
     test_created_message_is_binary()
     test_created_message_equal_length_to_int_passed_in()
     test_encode_message_equal_length_to_base()
-    test_encode_message_are_circuits()
-    test_encode_message_circuits_are_not_longer_than_2()
-    test_encode_message_circuits_use_only_H_X_I()
     test_decode_message_length_equals_base_length()
     test_decode_message_is_binary()
     test_decode_with_same_base_returns_original_bits()
