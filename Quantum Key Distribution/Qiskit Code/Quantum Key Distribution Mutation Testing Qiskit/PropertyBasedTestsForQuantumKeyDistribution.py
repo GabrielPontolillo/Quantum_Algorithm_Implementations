@@ -11,7 +11,7 @@ from qiskit import QuantumCircuit, Aer
 ### e.g. from Add_mutant_1 import remove_garbage, generate_binary, encode_message, measure_message
 #####################################################################################
 
-from QuantumKeyDistribution import remove_garbage, generate_binary, encode_message, measure_message
+from Add_mutant_1 import remove_garbage, generate_binary, encode_message, measure_message
 
 ###########################################################################
 ## Define composite strategies to generate lists of ints in equal length ##
