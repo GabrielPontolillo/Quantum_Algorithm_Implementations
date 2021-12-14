@@ -118,7 +118,7 @@ There are also 2 word document files in the QFT folder:
   
 ### Chapter 5: Guide to start
 
-1. It's best to look at the "QFT Benchmarks" document first, to get an idea of what the code looks like and what the QFT algorithm should do.
+1. It's best to look at the "QFT Code Comparisons & Description" and "QFT Properties" document first, to get an idea of what the code looks like and what the QFT algorithm should do.
 2. Then, I recommend trying to run the quantum algorithm code on your local machines, again be careful with the environments that you run the Qiskit and Cirq code. 
 3. Try and create another spreadsheet like [QFTres0111.xlsx](https://github.com/Lilgabz/Quantum-Algorithm-Implementations/blob/main/Quantum%20Fourier%20Transform/R%20Code/QFTres0111.xlsx) (but with a different set of input qubits), gather your own results across the different languages (you will have to modify some of the code to do this, like changing the **measurement qubits**, and **changing set_measure_x to set_measure_y**)  
 4. Analyse this spreadsheet with the R script, you will need to **change the file locations in the code** and **install the packages** that are used in the code by running: 
