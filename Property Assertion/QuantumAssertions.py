@@ -74,10 +74,14 @@ def assertPhase(backend, quantumCircuit, qubits_to_assert, expected_phases, meas
     resDf['-'] = resDf['-'].astype(int)
     resDf['-i'] = resDf['-i'].astype(int)
 
-    print(resDf)
+    print(f"full df \n {resDf}")
 
-    xAmount = resDf['-'][0].astype(int)
-    yAmount = resDf['-i'][0].astype(int)
+
+    xAmount = resDf['-'].tolist()
+    yAmount = resDf['-i'].tolist()
+
+    # print(f"x amounts {xAmount}")
+    # print(f"y amounts {yAmount}")
 
     ## make a dataframe that contains p values of chi square tests to analyse results
     ## if x and y counts are both 25/25/25/25, it means that we cannot calculate a phase
@@ -127,39 +131,72 @@ def assertPhase(backend, quantumCircuit, qubits_to_assert, expected_phases, meas
     lowestDf['estimated-phase'] =  lowestDf.apply(lambda row: setPhaseEstimate(row), axis=1)
 
     ## calculate what the expected row would be for the expected phase
-    expectedX, expectedY = expectedPhaseToRow(expected_phases[0],measurements_to_make)
+    #expectedX, expectedY = expectedPhaseToRow(expected_phases[0],measurements_to_make)
+    expectedX = np.zeros(len(expected_phases)).astype(int)
+    expectedY = np.zeros(len(expected_phases)).astype(int)
 
-    ## round expected X/Y amount counts
-    expectedX = int(round(expectedX))
-    expectedY = int(round(expectedY))
+    for idx, phase in enumerate(expected_phases):
+        expectedX[idx], expectedY[idx] = expectedPhaseToRow(expected_phases[idx],measurements_to_make)
 
-    ## set observed X values in a table
-    observedX = [xAmount,measurements_to_make-xAmount]
-    ## set expected X values in a table
-    expectedX = [expectedX,measurements_to_make-expectedX]
+    #print(type(expectedX[0]))
+    # print(f"expected x {expectedX}")
+    # print(f"expected y {expectedY}")
 
-    ## set observed Y values in a table
-    observedY = [yAmount,measurements_to_make-yAmount]
-    ## set expected Y values in a table
-    expectedY = [expectedY,measurements_to_make-expectedY]
+    for i in range(len(qubits_to_assert)):
+        ## set observed X values in a table
+        observedXtable = [xAmount[i],measurements_to_make-xAmount[i]]
+        ## set expected X values in a table
+        expectedXtable = [expectedX[i],measurements_to_make-expectedX[i]]
 
+        ## set observed Y values in a table
+        observedYtable = [yAmount[i],measurements_to_make-yAmount[i]]
+        ## set expected Y values in a table
+        expectedYtable = [expectedY[i],measurements_to_make-expectedY[i]]
 
-    print(observedX)
-    print(expectedX)
+        xPvalue = sci.chisquare(f_obs=observedXtable, f_exp=expectedXtable)[1]
 
-    print(observedY)
-    print(expectedY)
+        yPvalue = sci.chisquare(f_obs=observedYtable, f_exp=expectedYtable)[1]
 
-    print(sci.chisquare(f_obs=observedX, f_exp=expectedX)[1])
-    xPvalue = sci.chisquare(f_obs=observedX, f_exp=expectedX)[1]
+        print(observedXtable)
+        print(expectedXtable)
+        print(sci.chisquare(f_obs=observedXtable, f_exp=expectedXtable)[1])
 
-    print(sci.chisquare(f_obs=observedY, f_exp=expectedY)[1])
-    yPvalue = sci.chisquare(f_obs=observedY, f_exp=expectedY)[1]
+        print(observedYtable)
+        print(expectedYtable)
+        print(sci.chisquare(f_obs=observedYtable, f_exp=expectedYtable)[1])
 
-    if (yPvalue != np.NaN and yPvalue <= alpha):
-        raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in the qubits according to significance level {alpha}"))
-    if (xPvalue != np.NaN and xPvalue <= alpha):
-        raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in the qubits according to significance level {alpha}"))
+        if (yPvalue != np.NaN and yPvalue <= alpha):
+            raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in qubit {qubits_to_assert[i]} according to significance level {alpha}"))
+        if (xPvalue != np.NaN and xPvalue <= alpha):
+            raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in qubit {qubits_to_assert[i]} according to significance level {alpha}"))
+        
+
+    # ## set observed X values in a table
+    # observedX = [xAmount,measurements_to_make-xAmount]
+    # ## set expected X values in a table
+    # expectedX = [expectedX,measurements_to_make-expectedX]
+
+    # ## set observed Y values in a table
+    # observedY = [yAmount,measurements_to_make-yAmount]
+    # ## set expected Y values in a table
+    # expectedY = [expectedY,measurements_to_make-expectedY]
+
+    # print(observedX)
+    # print(expectedX)
+
+    # print(observedY)
+    # print(expectedY)
+
+    # print(sci.chisquare(f_obs=observedX, f_exp=expectedX)[1])
+    # xPvalue = sci.chisquare(f_obs=observedX, f_exp=expectedX)[1]
+
+    # print(sci.chisquare(f_obs=observedY, f_exp=expectedY)[1])
+    # yPvalue = sci.chisquare(f_obs=observedY, f_exp=expectedY)[1]
+
+    # if (yPvalue != np.NaN and yPvalue <= alpha):
+    #     raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in the qubits according to significance level {alpha}"))
+    # if (xPvalue != np.NaN and xPvalue <= alpha):
+    #     raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in the qubits according to significance level {alpha}"))
     
 
 
@@ -359,8 +396,8 @@ def setPhaseEstimate(row):
     return overallPhase
 
 def expectedPhaseToRow(expected_phase, number_of_measurements):
-    print(expected_phase)
-    print(number_of_measurements)
+    # print(expected_phase)
+    # print(number_of_measurements)
     expected_phase_y = expected_phase - 90
     expected_phase_y = expected_phase_y * math.pi
     expected_phase_y = expected_phase_y / 180
@@ -376,7 +413,9 @@ def expectedPhaseToRow(expected_phase, number_of_measurements):
     expected_phase = expected_phase * number_of_measurements
     # print(f"phase + {expected_phase} ---- phase - {number_of_measurements-expected_phase}") 
     # print(f"phase i {expected_phase_y} ---- phase -i {number_of_measurements-expected_phase_y}") 
-    return((number_of_measurements-expected_phase,number_of_measurements-expected_phase_y))
+    xRes = int(round(number_of_measurements-expected_phase))
+    yRes = int(round(number_of_measurements-expected_phase_y))
+    return((xRes, yRes))
 
 def applyChiSquareX(row, expected_amount):
     observed = [row['+'],row['-']]

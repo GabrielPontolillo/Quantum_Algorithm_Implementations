@@ -11,7 +11,7 @@ namespace Quantum_key_distribution {
     open Microsoft.Quantum.Arrays as Array; 
 
     operation generateBinary(len: Int): Int[] {
-        mutable binArray = new Int[0];
+        mutable binArray = [];
         for index in 0 .. (len - 1) {
             set binArray += [DrawRandomInt(0, 1)];
         }
@@ -37,7 +37,7 @@ namespace Quantum_key_distribution {
     }
 
     operation measureMessage(message: Qubit[], bases: Int[], messageLen: Int): Int[] {
-        mutable measurements = new Int[0];
+        mutable measurements = [];
         for q in 0 .. (messageLen - 1) {
             if (bases[q] == 0) { 
                 if (M(message[q]) == One) {
@@ -60,7 +60,7 @@ namespace Quantum_key_distribution {
     }
 
     operation removeGarbage(a_bases: Int[], b_bases: Int[], bits: Int[], messageLen: Int): Int[] {
-        mutable good_bits = new Int[0];
+        mutable good_bits = [];
         for q in 0 .. (messageLen - 1)  {
             if (a_bases[q] == b_bases[q]) {
                 set good_bits += [bits[q]];
@@ -71,7 +71,7 @@ namespace Quantum_key_distribution {
 
     operation sampleBits(bits: Int[], selection: Int[]): Int[] {
         mutable bitsArr = bits;
-        mutable sample = new Int[0];
+        mutable sample = [];
         for i in selection {
            //Message(IntAsString(i));
            //Message(IntAsString(Length(bitsArr)));
@@ -90,6 +90,9 @@ namespace Quantum_key_distribution {
         return buildString;
     }
     
+    operation fd(qubit: Qubit): Unit is Adj + Ctl {
+        X(qubit);
+    }
 
     operation runQKD() : Unit {
         let messageLen = 25;

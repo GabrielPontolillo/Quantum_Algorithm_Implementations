@@ -15,7 +15,7 @@ namespace QuantumFourierTransform
                 for (int i = 0; i < 100; i++){
                     var measurementResult = runQFTGenerator.Run(qsim).Result;
                     //get the first qubit
-                    resArr[i] = measurementResult[0];
+                    resArr[i] = measurementResult[1];
                 }
                 int ctr0 = 0;
                 int ctr1 = 0;
