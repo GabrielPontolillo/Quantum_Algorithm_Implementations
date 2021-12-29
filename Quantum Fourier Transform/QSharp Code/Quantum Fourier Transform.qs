@@ -9,6 +9,10 @@ namespace QuantumFourierTransform {
     open Microsoft.Quantum.Arithmetic; 
     open Microsoft.Quantum.Arrays as Array; 
 
+    // Code from Qiskit 
+    // https://qiskit.org/textbook/ch-algorithms/quantum-fourier-transform.html
+    // Code adapted for Q#
+
     operation GenerateQFT(qubits: Qubit[], num: Int) : Result[] {
         if (num == 0){
             //tell it to measure the x axis

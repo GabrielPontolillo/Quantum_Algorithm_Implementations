@@ -10,6 +10,10 @@ namespace Quantum_key_distribution {
     open Microsoft.Quantum.Arithmetic; 
     open Microsoft.Quantum.Arrays as Array; 
 
+    // Code used from
+    // (https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html)
+    // Coda adapted for Q#
+
     operation generateBinary(len: Int): Int[] {
         mutable binArray = [];
         for index in 0 .. (len - 1) {
