@@ -9,6 +9,10 @@ namespace QPE_Qsharp {
     open Microsoft.Quantum.Arithmetic; 
     open Microsoft.Quantum.Arrays as Array; 
 
+    // (https://qiskit.org/textbook/ch-algorithms/quantum-phase-estimation.html)
+
+    // Code adapted for Q#
+
     operation generalised_qpe_qsharp(amt_estimation_qubits: Int, angle: Double) : Result[] {
         use qubits = Qubit[amt_estimation_qubits+1];
         

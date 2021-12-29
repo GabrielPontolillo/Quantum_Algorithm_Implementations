@@ -10,6 +10,11 @@ namespace Superdense_Coding {
     open Microsoft.Quantum.Arithmetic; 
     open Microsoft.Quantum.Arrays as Array; 
 
+    // Code from
+    // (https://qiskit.org/textbook/ch-algorithms/superdense-coding.html)
+    // Adapted for Q#
+
+
     operation createBellPair(qubits: Qubit[]): Unit { 
         H(qubits[1]);
         (Controlled X)([qubits[1]],qubits[0]);        

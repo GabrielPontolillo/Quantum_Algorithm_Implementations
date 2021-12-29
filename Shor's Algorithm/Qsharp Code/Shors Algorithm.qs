@@ -11,6 +11,10 @@ namespace Shors_Algorithm {
     open Microsoft.Quantum.Arithmetic; 
     open Microsoft.Quantum.Arrays as Array; 
 
+    // Code from
+    // (https://qiskit.org/textbook/ch-algorithms/shor.html)
+    // Adapted for Q#
+
     operation c_amod15(a: Int, power: Int, qubits: Qubit[]): Unit is Ctl{
         mutable checkArr = [2, 7, 8, 11, 13];
         mutable isIn = false;
