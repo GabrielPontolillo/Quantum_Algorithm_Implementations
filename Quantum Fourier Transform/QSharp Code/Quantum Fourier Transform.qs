@@ -11,9 +11,9 @@ namespace QuantumFourierTransform {
 
     operation GenerateQFT(qubits: Qubit[], num: Int) : Result[] {
         if (num == 0){
+            //tell it to measure the x axis
             set_measure_x(qubits);
             mutable results = [];
-            //tell it to measure the x axis
             for index in 0 .. Length(qubits) - 1 {
                 set results += [M(qubits[index])];
             }
@@ -42,9 +42,8 @@ namespace QuantumFourierTransform {
     }
 
     operation runQFTGenerator() : Result[] {
-        let max = 4;
-        use qubits = Qubit[max];
+        use qubits = Qubit[4];
         X(qubits[0]);
-        return GenerateQFT(qubits, 0);
+        return GenerateQFT(qubits, Length(qubits));
     }
 }
