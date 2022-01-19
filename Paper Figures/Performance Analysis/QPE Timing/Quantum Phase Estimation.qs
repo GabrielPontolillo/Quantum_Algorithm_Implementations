@@ -53,8 +53,17 @@ namespace QPE_Qsharp {
         }
     }
 
-    @EntryPoint()
     operation runQPEGenerator() : Result[] {
         return generalised_qpe_qsharp(8,(PI()*2.0*(1.0/3.0)));
+    }
+
+    // version that loops inside of the Q# section instead
+    operation runQPEGeneratorLoop() : Result[][] {
+        let repeats = 10000;
+        mutable results = [new Result[0]];
+            for loop in 0..repeats - 1 {
+                set results += [generalised_qpe_qsharp(8,(PI()*2.0*(1.0/3.0)))];
+            }
+        return results;
     }
 }
