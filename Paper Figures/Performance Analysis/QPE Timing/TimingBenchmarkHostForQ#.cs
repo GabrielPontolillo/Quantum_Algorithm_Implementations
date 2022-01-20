@@ -20,7 +20,7 @@ namespace QPE_Qsharp
             /////////////////////////////
             /// DO POSTPROCESSING RUN ///
             /////////////////////////////
-            for (int j = 0; j < 10; j++){
+            for (int j = 0; j < 11; j++){
                 sw.Reset();
                 sw.Start();
                 using (var qsim = new QuantumSimulator())
@@ -55,17 +55,24 @@ namespace QPE_Qsharp
                     //Console.WriteLine((double)query.Item / Math.Pow((double)2.0, (double)ESTIMATION_QUBIT_AMT));
                 }
                 sw.Stop();
-                postProTimes[j] = sw.ElapsedMilliseconds;
+                // ignore first loop for JIT compiling delay
+                if (j != 0){
+                    postProTimes[j-1] = sw.ElapsedMilliseconds;
+                }
             }
             Console.WriteLine("With my postprocessing to get the final value");
-            long mean = postProTimes.Sum()/10;
-            Console.WriteLine("Average time taken for " + RUNS.ToString() + " shots: " + mean.ToString() + "ms");
+            //long mean = postProTimes.Sum()/10;
+            //Console.WriteLine("Average time taken for " + RUNS.ToString() + " shots: " + mean.ToString() + "ms");
+            Console.WriteLine();
+            Array.ForEach<long>(postProTimes, Console.WriteLine);
             
+
             ////////////////////////////////
             /// NOW DO NO POSTPROCESSING ///
             ////////////////////////////////
+            /*
             long[] noPostProTimes = new long[10];
-            for (int j = 0; j < 10; j++){
+            for (int j = 0; j < 11; j++){
                 sw.Reset();
                 sw.Start();
                 using (var qsim = new QuantumSimulator())
@@ -76,19 +83,23 @@ namespace QPE_Qsharp
                     }
                 }
                 sw.Stop();
-                noPostProTimes[j] = sw.ElapsedMilliseconds;
+                // ignore first loop for JIT compiling delay
+                if (j != 0){
+                    noPostProTimes[j-1] = sw.ElapsedMilliseconds;
+                }
             }
             Console.WriteLine("With No Postprocessing");
-            long meanNoPostpro = noPostProTimes.Sum()/10;
-            Console.WriteLine("Average time taken for " + RUNS.ToString() + " shots: " + meanNoPostpro.ToString() + "ms");
-            
-            
+            //long meanNoPostpro = noPostProTimes.Sum()/10;
+            //Console.WriteLine("Average time taken for " + RUNS.ToString() + " shots: " + meanNoPostpro.ToString() + "ms");
+            Array.ForEach<long>(noPostProTimes, Console.WriteLine);
+            */
             
             /////////////////////////////////////////////////
             /// NOW ONLY LOOP FROM QS + NO POSTPROCESSING ///
             /////////////////////////////////////////////////
+            /*
             long[] noPostProLoopInQsTimes = new long[10];
-            for (int j = 0; j < 10; j++){
+            for (int j = 0; j < 11; j++){
                 sw.Reset();
                 sw.Start();
                 using (var qsim = new QuantumSimulator())
@@ -96,12 +107,16 @@ namespace QPE_Qsharp
                     var measurementResult = runQPEGeneratorLoop.Run(qsim).Result;
                 }
                 sw.Stop();
-                noPostProLoopInQsTimes[j] = sw.ElapsedMilliseconds;
+                // ignore first loop for JIT compiling delay
+                if (j != 0){
+                    noPostProLoopInQsTimes[j-1] = sw.ElapsedMilliseconds;
+                }
             }
             Console.WriteLine("Calling the for loop from QS code");
-            long meanNoPostproLoopQs = noPostProLoopInQsTimes.Sum()/10;
-            Console.WriteLine("Average time taken for " + RUNS.ToString() + " shots: " + meanNoPostproLoopQs.ToString() + "ms");
-            
+            //long meanNoPostproLoopQs = noPostProLoopInQsTimes.Sum()/10;
+            //Console.WriteLine("Average time taken for " + RUNS.ToString() + " shots: " + meanNoPostproLoopQs.ToString() + "ms");
+            Array.ForEach<long>(noPostProLoopInQsTimes, Console.WriteLine);
+            */
         }
     }
 }

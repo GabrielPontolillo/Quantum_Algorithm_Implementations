@@ -58,6 +58,7 @@ namespace QPE_Qsharp {
     }
 
     // version that loops inside of the Q# section instead
+    
     operation runQPEGeneratorLoop() : Result[][] {
         let repeats = 10000;
         mutable results = [new Result[0]];
