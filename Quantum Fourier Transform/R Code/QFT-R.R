@@ -2,7 +2,7 @@
 library("xlsx")
 library("readxl")
 library("dplyr")
-my_data <- read_excel("C:\\Users\\Gabriel\\Desktop\\University\\Quantum Computing Algorithms\\QFT\\QFT-R\\QFTres0000.xlsx")
+my_data <- read_excel("QFTres0000.xlsx")
 str(my_data)
 my_data = my_data/5000
 my_data = my_data*2
@@ -66,6 +66,6 @@ for (j in 1:nrow(my_data)) {
 str(ans_lst[])
 my_data <- my_data %>% mutate("Calculated Phase" = ans_lst)
 write.xlsx(my_data, 
-           file = "C:\\Users\\Gabriel\\Desktop\\University\\Quantum Computing Algorithms\\QFT\\QFT-R\\QFTres0000Calc.xlsx",
-           sheetName="QFT0111Results", append=FALSE)
+           file = "QFTres0000Calc.xlsx",
+           sheetName="QFT0000Results", append=FALSE)
 
