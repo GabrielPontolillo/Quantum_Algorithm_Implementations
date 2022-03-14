@@ -8,8 +8,9 @@ namespace QPE_Qsharp
 {
     class Driver
     {
-        const int RUNS = 1000;
-        const int ESTIMATION_QUBIT_AMT = 8;
+        const int RUNS = 10000;
+        const int ESTIMATION_QUBIT_AMT = 7;
+        //change in both files
 
         static void Main(string[] args)
         {

@@ -55,6 +55,8 @@ namespace QPE_Qsharp {
 
     @EntryPoint()
     operation runQPEGenerator() : Result[] {
-        return generalised_qpe_qsharp(8,(PI()*2.0*(1.0/3.0)));
+        //change in both files
+        let ESTIMATION_QUBIT_AMT = 7;
+        return generalised_qpe_qsharp(ESTIMATION_QUBIT_AMT,(13.0*PI()/9.0));
     }
 }
