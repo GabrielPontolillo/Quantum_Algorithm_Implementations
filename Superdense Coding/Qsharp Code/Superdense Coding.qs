@@ -22,7 +22,7 @@ namespace Superdense_Coding {
     
     operation encodeMessage(qubit: Qubit, message: Int[]): Unit { 
         for num in 0..1 {
-            Message(IntAsString(message[num]));
+            //Message(IntAsString(message[num]));
             if (message[num] != 0 and message[num] != 1 ){
                 fail("invalid message, it must be made up of 1 and 0 (int)");
             }     
@@ -53,7 +53,8 @@ namespace Superdense_Coding {
 
         mutable results = new Result[0];
         for index in 0..1 {
-            set results += [M(qubits[index])];
+            // measure in reverse order to flip endian to match other results
+            set results += [M(qubits[1-index])];
         }
         ResetAll(qubits);
 
