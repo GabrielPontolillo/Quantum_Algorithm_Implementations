@@ -78,7 +78,7 @@ namespace Shors_Algorithm {
         for index in 0..n_count-1 {
             set results += [M(qubits[index])];
         }
-        //ResetAll(qubits);
+        ResetAll(qubits);
         return results;
     }
 
