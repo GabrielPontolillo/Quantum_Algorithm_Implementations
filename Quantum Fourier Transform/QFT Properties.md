@@ -19,11 +19,11 @@ assertEqual((*x<sub>0</sub>…x<sub>n-1</sub>*), (*x'<sub>0</sub>…x'<sub>n-1</
  
 Vector of qubits, *x<sub>0</sub> … x<sub>n-1</sub>*
 
-s.t.*&emsp;∀ i: 
+s.t.*&emsp;∀ i: *
 
-&emsp;&emsp;&emsp;0 <= i < n:
+*&emsp;&emsp;&emsp;0 <= i < n:*
 
-&emsp;&emsp;&emsp;x<sub>i</sub> = |0> or x<sub>i</sub> = |1>*
+*&emsp;&emsp;&emsp;x<sub>i</sub> = |0> or x<sub>i</sub> = |1>*
 
 Where the binary total of *x<sub>0</sub> … x<sub>n-1</sub>* : T   
 
@@ -41,11 +41,11 @@ assertPhase( ( *x<sub>0</sub> … x<sub>n-1</sub>* ), ( ( *πT/2<sup>0</sup>* )<
  
 Vector of qubits, *x<sub>0</sub> … x<sub>n-1</sub>*
 
-s.t.*&emsp;∀ i: 
+s.t.*&emsp;∀ i: *
 
-&emsp;&emsp;&emsp;0 <= i < n:
+*&emsp;&emsp;&emsp;0 <= i < n:*
 
-&emsp;&emsp;&emsp;x<sub>i</sub> = |0> or x<sub>i</sub> = |1>*
+*&emsp;&emsp;&emsp;x<sub>i</sub> = |0> or x<sub>i</sub> = |1>*
 
 - Operation:
 
@@ -70,13 +70,13 @@ assertTrue( estimatePhase( *x<sub>0</sub>* ) MOD  ( *πT/2<sup>n-1</sup>* )<sup>
  
  Two vectors of qubits, *x<sub>0</sub> … x<sub>n-1</sub>, &emsp; y<sub>0</sub> … y<sub>n-1</sub>*
 
-s.t.*&emsp;∀ i: 
+s.t.*&emsp;∀ i: *
 
-&emsp;&emsp;&emsp;0 <= i < n:
+*&emsp;&emsp;&emsp;0 <= i < n:*
 
-&emsp;&emsp;&emsp;x<sub>i</sub> = |0> or x<sub>i</sub> = |1>, 
+*&emsp;&emsp;&emsp;x<sub>i</sub> = |0> or x<sub>i</sub> = |1>, *
 
-&emsp;&emsp;&emsp;y<sub>i</sub> = |0> or y<sub>i</sub> = |1>*
+*&emsp;&emsp;&emsp;y<sub>i</sub> = |0> or y<sub>i</sub> = |1>*
 
 Where the binary total of *x<sub>0</sub> … x<sub>n-1</sub>, > y<sub>0</sub> … y<sub>n-1</sub>*  
 - Operation:
