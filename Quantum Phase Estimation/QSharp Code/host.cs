@@ -42,8 +42,19 @@ namespace QPE_Qsharp
                     orderby g.Count() descending
                     select new { Item = g.Key, Count = g.Count() }).First();
 
+                var q2 = (from item in intArr
+                    group item by item into g
+                    orderby g.Count() descending
+                    select new { Item = (g.Key/ Math.Pow((double)2.0, (double)ESTIMATION_QUBIT_AMT)), Count = g.Count() });
+
+                foreach(var num in q2){
+                    Console.WriteLine(num);
+                }
+
+                Console.WriteLine("\n");
                 Console.WriteLine(query);
                 Console.WriteLine(query.Item);
+
                 Console.WriteLine((double)query.Item / Math.Pow((double)2.0, (double)ESTIMATION_QUBIT_AMT));
             }
         }
