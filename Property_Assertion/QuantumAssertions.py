@@ -1,3 +1,7 @@
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action='ignore', category=RuntimeWarning)
+
 import pandas as pd  
 import math
 import numpy as np
@@ -74,7 +78,7 @@ def assertPhase(backend, quantumCircuit, qubits_to_assert, expected_phases, meas
     resDf['-'] = resDf['-'].astype(int)
     resDf['-i'] = resDf['-i'].astype(int)
 
-    print(f"full df \n {resDf}")
+    #print(f"full df \n {resDf}")
 
 
     xAmount = resDf['-'].tolist()
@@ -142,6 +146,8 @@ def assertPhase(backend, quantumCircuit, qubits_to_assert, expected_phases, meas
     # print(f"expected x {expectedX}")
     # print(f"expected y {expectedY}")
 
+    p_values = []
+
     for i in range(len(qubits_to_assert)):
         ## set observed X values in a table
         observedXtable = [xAmount[i],measurements_to_make-xAmount[i]]
@@ -157,19 +163,23 @@ def assertPhase(backend, quantumCircuit, qubits_to_assert, expected_phases, meas
 
         yPvalue = sci.chisquare(f_obs=observedYtable, f_exp=expectedYtable)[1]
 
-        print(observedXtable)
-        print(expectedXtable)
-        print(sci.chisquare(f_obs=observedXtable, f_exp=expectedXtable)[1])
+        #print(observedXtable)
+        #print(expectedXtable)
+        #print(sci.chisquare(f_obs=observedXtable, f_exp=expectedXtable)[1])
 
-        print(observedYtable)
-        print(expectedYtable)
+        #print(observedYtable)
+        #print(expectedYtable)
         print(sci.chisquare(f_obs=observedYtable, f_exp=expectedYtable)[1])
 
-        if (yPvalue != np.NaN and yPvalue <= alpha):
-            raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in qubit {qubits_to_assert[i]} according to significance level {alpha}"))
-        if (xPvalue != np.NaN and xPvalue <= alpha):
-            raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in qubit {qubits_to_assert[i]} according to significance level {alpha}"))
+        p_values.append(xPvalue)
+        p_values.append(yPvalue)
+
+        #if (yPvalue != np.NaN and yPvalue <= alpha):
+        #    raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in qubit {qubits_to_assert[i]} according to significance level {alpha}"))
+        #if (xPvalue != np.NaN and xPvalue <= alpha):
+        #    raise(AssertionError(f"Null hypothesis rejected, there is a significant enough difference in qubit {qubits_to_assert[i]} according to significance level {alpha}"))
         
+    holm_bonferroni_correction(p_values, alpha)
 
     # ## set observed X values in a table
     # observedX = [xAmount,measurements_to_make-xAmount]
@@ -430,6 +440,17 @@ def applyChiSquareY(row, expected_amount):
 def assertIfBothTrue(row):
     if row.all():
         raise AssertionError("Qubit does not appear to have a phase applied to it!")
+
+def holm_bonferroni_correction(p_values, family_wise_alpha):
+    print("holm")
+    p_values = [1 if math.isnan(x) else x for x in p_values]
+    p_values.sort()
+    print(p_values)
+    for i in range(len(p_values)):
+        if (p_values[i] <= (family_wise_alpha/(len(p_values)-i))):
+            print("failed it !")
+            raise(AssertionError(f"Null hypothesis rejected"))
+
 
 # def assertIfExpectedDoNotFitTolerance(row, expected, tolerance):
 #     deltaAngle = (row['estimated-phase'] - expected[row.name] + 180 + 360) % 360 - 180

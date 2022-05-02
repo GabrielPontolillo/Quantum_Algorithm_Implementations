@@ -26,19 +26,5 @@ def qft_rotations(circuit, n):
     n -= 1
     circuit.h(n)
     for qubit in range(n):
-        circuit.cp(pi/2**(n-qubit), qubit, n)
-    return qft_rotations(circuit, n)
-
-def qft_rotations_not_inplace(n):
-    circuit = QuantumCircuit(n)
-    #if qubit amount is 0, then do nothing and return
-    if n == 0:
-        #set it to measure the x axis
-        #set_measure_x(circuit, 4)
-        #circuit.measure_all()
-        return circuit
-    n -= 1
-    circuit.h(n)
-    for qubit in range(n):
-        circuit.cp(pi/2**(n-qubit), qubit, n)
+        pass
     return qft_rotations(circuit, n)
