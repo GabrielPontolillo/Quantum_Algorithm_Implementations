@@ -52,7 +52,7 @@ s.t.&emsp; *∀ i:*
 QFT( *x<sub>0</sub> … x<sub>n-1</sub>* )
 - Output:
 
-assertTrue( estimatePhase( *x<sub>0</sub>* ) MOD  ( *πT/2<sup>0</sup>* )<sup>c</sup> ≈ 0 )
+assertTrue( estimatePhase( *x<sub>0</sub>* ) MOD  ( *π/2<sup>0</sup>* )<sup>c</sup> ≈ 0 )
 
 .
 
@@ -60,7 +60,7 @@ assertTrue( estimatePhase( *x<sub>0</sub>* ) MOD  ( *πT/2<sup>0</sup>* )<sup>c<
 
 .
 
-assertTrue( estimatePhase( *x<sub>0</sub>* ) MOD  ( *πT/2<sup>n-1</sup>* )<sup>c</sup> ≈ 0 )
+assertTrue( estimatePhase( *x<sub>n-1</sub>* ) MOD  ( *π/2<sup>n-1</sup>* )<sup>c</sup> ≈ 0 )
 
 ---
 
@@ -90,17 +90,19 @@ assertTrue( estimatePhase( *x<sub>n-1</sub>* ) > estimatePhase( *y<sub>n-1</sub>
 
 ---
 
-### When QFT is applied to two sets of qubits in the |1> state of different length, the LSB qubit on the set of qubits with the higher binary total will  have a greater phase.
+### When QFT is applied to two sets of qubits in the |1> state of different length, the LSB qubit on the longer set will have a smaller phase.
 
  - Precondition:
  
- Two vectors of qubits, *x<sub>0</sub> … x<sub>n-1</sub>, &emsp; y<sub>0</sub> … y<sub>n-1</sub>*
+ Two vectors of qubits, *x<sub>0</sub> … x<sub>n-1</sub>, &emsp; y<sub>0</sub> … y<sub>m-1</sub>*
 
-s.t.&emsp; *∀ i:* 
+s.t.&emsp; *∀ i,j:* 
 
-*&emsp;&emsp;&emsp;0 <= i < n:*
+*&emsp;&emsp;&emsp;0 <= i < n, i < j < m:*
 
-*&emsp;&emsp;&emsp;x<sub>i</sub> = |1>, &emsp;y<sub>i</sub> = |1>*
+*&emsp;&emsp;&emsp;x<sub>i</sub> = |1>, &emsp;y<sub>j</sub> = |1>*
+
+*&emsp;&emsp;&emsp;n < m:*
 
 - Operation:
 
